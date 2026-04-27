@@ -1,12 +1,12 @@
 import { getUsers, saveUsers, saveSession, clearSession } from './storage'
 import type { User, Session } from '@/types/auth'
 
-// helper to generate ID
+// Generate ID
 function generateId() {
   return crypto.randomUUID()
 }
 
-// SIGNUP
+// Signup Function
 export function signup(email: string, password: string) {
   const users = getUsers()
 
@@ -42,7 +42,7 @@ export function signup(email: string, password: string) {
   }
 }
 
-// LOGIN
+// Login function
 export function login(email: string, password: string) {
   const users = getUsers()
 
@@ -70,7 +70,7 @@ export function login(email: string, password: string) {
   }
 }
 
-// LOGOUT
+// Logout function
 export function logout() {
   clearSession()
 }

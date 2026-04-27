@@ -21,28 +21,29 @@ export default function SignupForm() {
       return
     }
 
-    router.push('/dashboard')
+    router.replace('/dashboard')
+    router.refresh()
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
       <input
-        data-testid="auth-signup-email"
-        type="email"
-        placeholder="Email"
+        data-testid='auth-signup-email'
+        type='email'
+        placeholder='Email'
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={e => setEmail(e.target.value)}
       />
 
       <input
-        data-testid="auth-signup-password"
-        type="password"
-        placeholder="Password"
+        data-testid='auth-signup-password'
+        type='password'
+        placeholder='Password'
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={e => setPassword(e.target.value)}
       />
 
-      <button data-testid="auth-signup-submit" type="submit">
+      <button data-testid='auth-signup-submit' type='submit'>
         Signup
       </button>
 
