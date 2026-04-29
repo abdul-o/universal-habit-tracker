@@ -36,7 +36,7 @@ export default function HabitForm({ onSave, initial }: Props) {
       userId: initial?.userId || '',
       name: result.value,
       description,
-      frequency: 'daily',
+
     })
 
     setName('')
