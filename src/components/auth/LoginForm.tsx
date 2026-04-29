@@ -17,7 +17,7 @@ export default function LoginForm() {
     const result = login(email, password)
 
     if (!result.success) {
-      setError(result.error)
+      setError(result.error || null)
       return
     }
 

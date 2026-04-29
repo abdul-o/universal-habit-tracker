@@ -1,40 +1,46 @@
-# 🧠 Habit Tracker PWA
+#  Habit Tracker PWA
 
-A fully functional **Habit Tracker Progressive Web App (PWA)** built with **Next.js, React, and Tailwind CSS**, implementing authentication, habit management, offline support, and a complete automated testing suite.
-
----
-
-## 🚀 Live Demo
-
-👉 *deployed link*
+A Progressive Web App (PWA) built with Next.js that allows users to create, track, and maintain habits with persistent local storage and offline support.
 
 ---
 
-## 📦 Installation & Setup
+##  Project Overview
 
-Clone the repository and install dependencies:
+This application implements a habit tracking system where users can:
+
+* Sign up and log in
+* Create and manage habits
+* Track daily streaks
+* Persist data locally
+* Use the app offline via PWA support
+
+The project strictly follows a Technical Requirements Document (TRD) including structure, naming, and testing constraints.
+
+---
+
+##  Setup Instructions
 
 ```bash
-git clone https://github.com/abdul-o/universal-habit-tracker
+git clone <your-repo-url>
 cd universal-habit-tracker
 npm install
 ```
 
-Run the development server:
+---
+
+##  Run Instructions
 
 ```bash
 npm run dev
 ```
 
-Open in browser:
+Visit:
 
-```text
+```
 http://localhost:3000
 ```
 
----
-
-## 🧪 Running Tests
+##  Test Instructions
 
 ### Unit Tests
 
@@ -48,7 +54,7 @@ npm run test:unit
 npm run test:integration
 ```
 
-### End-to-End Tests (E2E)
+### End-to-End Tests
 
 ```bash
 npm run test:e2e
@@ -56,159 +62,139 @@ npm run test:e2e
 
 ---
 
-## 🧱 Project Structure
+##  Local Persistence Structure
 
+The application uses **localStorage** as its data layer.
+
+### Stored Keys
+
+* `users` → array of registered users
+* `session` → currently logged-in user
+* `habits` → list of habits grouped by user
+
+### Example Structure
+
+```json
+{
+  "users": [
+    {
+      "id": "uuid",
+      "email": "user@example.com",
+      "password": "123456",
+      "createdAt": "timestamp"
+    }
+  ],
+  "session": {
+    "userId": "uuid",
+    "email": "user@example.com"
+  },
+  "habits": [
+    {
+      "id": "uuid",
+      "userId": "uuid",
+      "title": "Exercise",
+      "completedDates": ["2026-04-01"]
+    }
+  ]
+}
 ```
-src/
-  app/
-    layout.tsx
-    page.tsx
-    login/
-    signup/
-    dashboard/
-  components/
-    auth/
-    habits/
-    shared/
-  lib/
-    auth.ts
-    habits.ts
-    storage.ts
-    streaks.ts
-    validators.ts
-    slug.ts
-  types/
-public/
-  manifest.json
-  sw.js
-tests/
-  unit/
-  integration/
-  e2e/
-```
+
+### Behavior
+
+* Session is checked on route access
+* Data persists across reloads
+* Each user sees only their own habits
 
 ---
 
-## 🔐 Features
+##  PWA Implementation
 
-### Authentication
+The app includes Progressive Web App support via:
 
-* User signup and login
-* Session persistence using localStorage
-* Protected routes
+### 1. Service Worker (`sw.js`)
 
-### Habit Management
+* Caches the root (`/`) on install
+* Uses a **network-first strategy**
+* Falls back to cached version when offline
 
-* Create habits
-* Delete habits
-* Mark habits as completed
-* Track streaks
+### 2. Manifest File
 
-### Persistence
+Defines:
 
-* All data stored locally (no backend required)
-* Session survives page reload
+* App name
+* Icons
+* Theme colors
+* Standalone display mode
 
-### Progressive Web App (PWA)
+### 3. Offline Behavior
 
-* Service Worker implemented
-* Offline support enabled
-* App shell caching
+* App loads normally when online
+* When offline:
 
----
-
-## 🧪 Testing Strategy
-
-### Unit Tests
-
-* Validate core utility functions:
-
-  * slug generation
-  * validators
-  * streak calculations
-  * habit logic
-
-### Integration Tests
-
-* Auth flow (signup & login)
-* Habit form behavior
-
-### End-to-End Tests (Playwright)
-
-* Full user journey:
-
-  * splash screen
-  * authentication
-  * dashboard usage
-  * habit creation
-  * persistence
-  * logout
-  * offline functionality
+  * Navigation falls back to cached `/`
+  * Splash screen renders successfully
 
 ---
 
-## ⚙️ Technical Decisions
+##  Technical Decisions
 
-* **Next.js App Router** used for routing and structure
-* **LocalStorage** used as a lightweight database
-* **Service Worker** implemented manually for PWA behavior
-* **Vitest** used for unit and integration testing
-* **Playwright** used for E2E testing
-
----
-
-## ⚖️ Assumptions & Trade-offs
-
-* No backend API — all data is stored locally
-* Single-user session model
-* No encryption for stored data (for simplicity)
-* Focus was on meeting specification and test requirements
+* **Next.js App Router** for routing
+* **LocalStorage** instead of backend (TRD requirement)
+* **Vitest** for unit + integration tests
+* **Playwright** for E2E testing
+* **Manual Service Worker** (no external libraries)
 
 ---
 
-## 📌 Mapping to Requirements
+##  Trade-offs & Limitations
 
-* ✔ Required folder structure implemented
-* ✔ Required naming conventions followed
-* ✔ Required routes created
-* ✔ Required utilities exported
-* ✔ Required test files and titles implemented
-* ✔ PWA requirements satisfied
-* ✔ All automated tests passing
+* No backend → data not shared across devices
+* No encryption for stored data
+* Limited offline caching (only app shell)
+* Not optimized for multi-user environments
 
 ---
 
-## 🚀 Deployment
+##  Mapping to Technical Requirements
 
-To build the app:
+| Requirement        | Implementation                         |
+| ------------------ | -------------------------------------- |
+| Folder structure   | Matches TRD exactly                    |
+| Routes             | `/`, `/login`, `/signup`, `/dashboard` |
+| Naming conventions | Followed strictly                      |
+| Utilities          | Implemented in `lib/`                  |
+| Local persistence  | Implemented via `storage.ts`           |
+| PWA support        | `manifest.json` + `sw.js`              |
+| Tests              | Unit, Integration, E2E all implemented |
+
+---
+
+##  Test File Breakdown
+
+* `tests/unit/` → core logic (slug, validators, streaks, habits)
+* `tests/integration/` → auth flow, habit form
+* `tests/e2e/` → full app behavior
+
+Each test file uses required naming conventions and validates expected behavior.
+
+---
+
+##  Deployment
 
 ```bash
 npm run build
 npm start
 ```
 
-Recommended deployment:
-
-👉 Vercel (auto-detects Next.js)
+Recommended platform: **Vercel**
 
 ---
 
-## 🎯 Final Status
+##  Final Status
 
-```text
-All Tests Passed ✅
-PWA Working ✅
-Requirements Met ✅
+```
+All Tests Passed
+PWA Working
+TRD Requirements Met
 ```
 
----
-
-## 🙌 Author
-
-**Your Name**
-
----
-
-## 📄 License
-
-This project is for educational and assessment purposes.

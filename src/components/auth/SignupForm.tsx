@@ -17,7 +17,7 @@ export default function SignupForm() {
     const result = signup(email, password)
 
     if (!result.success) {
-      setError(result.error)
+      setError(result.error || null)
       return
     }
 
