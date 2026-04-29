@@ -18,7 +18,7 @@ export default function HabitForm({ onSave, initial }: Props) {
   useEffect(() => {
     if (initial) {
       setName(initial.name)
-      setDescription(initial.description)
+      setDescription(initial.description || '')
     }
   }, [initial])
 
