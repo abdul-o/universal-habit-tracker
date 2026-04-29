@@ -43,6 +43,7 @@ export default function DashboardPage() {
   function handleLogout() {
     logout()
     router.push('/login')
+    router.refresh()
   }
 
   return (

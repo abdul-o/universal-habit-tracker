@@ -26,28 +26,57 @@ export default function SignupForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-      <input
-        data-testid='auth-signup-email'
-        type='email'
-        placeholder='Email'
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-      />
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-500 to-pink-500 px-4">
+      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8 space-y-6">
 
-      <input
-        data-testid='auth-signup-password'
-        type='password'
-        placeholder='Password'
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-      />
+        <h2 className="text-2xl font-bold text-center text-gray-800">
+          Create Account 🚀
+        </h2>
 
-      <button data-testid='auth-signup-submit' type='submit'>
-        Signup
-      </button>
+        <form onSubmit={handleSubmit} className="space-y-4">
 
-      {error && <p>{error}</p>}
-    </form>
+          <input
+            data-testid="auth-signup-email"
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+          />
+
+          <input
+            data-testid="auth-signup-password"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+          />
+
+          {error && (
+            <p className="text-red-500 text-sm text-center">{error}</p>
+          )}
+
+          <button
+            data-testid="auth-signup-submit"
+            type="submit"
+            className="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition"
+          >
+            Sign Up
+          </button>
+        </form>
+
+        <p className="text-center text-sm text-gray-600">
+          Already have an account?{' '}
+          <span
+            onClick={() => router.push('/login')}
+            className="text-purple-600 cursor-pointer hover:underline"
+          >
+            Login
+          </span>
+        </p>
+
+      </div>
+    </div>
   )
 }
