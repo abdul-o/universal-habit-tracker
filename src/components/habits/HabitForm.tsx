@@ -46,12 +46,13 @@ export default function HabitForm({ onSave, initial }: Props) {
 
   return (
     <form data-testid="habit-form" onSubmit={handleSubmit}
-      className="flex flex-col gap-3">
+      className="flex flex-col gap-3 ">
       <input
         data-testid="habit-name-input"
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Habit name"
+        className="border p-2 rounded"
       />
 
       <input

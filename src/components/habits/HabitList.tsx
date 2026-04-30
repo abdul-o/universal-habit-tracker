@@ -109,7 +109,7 @@ export default function HabitList() {
       </div>
 
       {habits.length === 0 ? (
-        <p data-testid="empty-state" className="text-gray-500">
+        <p data-testid="empty-state" className="text-gray-600">
           No habits yet
         </p>
       ) : (

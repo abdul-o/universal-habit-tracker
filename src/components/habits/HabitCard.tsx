@@ -53,7 +53,7 @@ export default function HabitCard ({
       <button
         data-testid={`habit-complete-${slug}`}
         onClick={handleToggle}
-        className='bg-green-500 text-white px-3 py-1 rounded'
+        className='bg-green-500 text-white mr-4 px-3 py-1 rounded'
       >
         Toggle Today
       </button>
@@ -61,7 +61,7 @@ export default function HabitCard ({
       <button
         data-testid={`habit-edit-${slug}`}
         onClick={() => onEdit(habit)}
-        className='bg-yellow-500 text-white px-3 py-1 rounded'
+        className='bg-yellow-500 text-white px-3 py-1 rounded mr-4'
       >
         Edit
       </button>
@@ -69,7 +69,7 @@ export default function HabitCard ({
       <button
         data-testid={`habit-delete-${slug}`}
         onClick={handleDelete}
-        className='bg-red-500 text-white px-3 py-1 rounded'
+        className='bg-red-500 text-white px-3 py-1 rounded mr-4'
       >
         Delete
       </button>
@@ -77,6 +77,7 @@ export default function HabitCard ({
       {confirmingDelete && (
         <button
           data-testid='confirm-delete-button'
+          className='bg-red-900 text-white rounded px-3 py-1'
           onClick={() => onDelete(habit.id)}
         >
           Confirm Delete

@@ -14,12 +14,34 @@ export default function SignupForm() {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
 
+    //  FRONTEND VALIDATION
+    if (!email.trim() || !password.trim()) {
+      setError('Email and password are required')
+      return
+    }
+
+    // optional: basic email format check
+    const emailRegex = /^\S+@\S+\.\S+$/
+    if (!emailRegex.test(email)) {
+      setError('Enter a valid email address')
+      return
+    }
+
+    // optional: password strength
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters')
+      return
+    }
+
     const result = signup(email, password)
 
     if (!result.success) {
       setError(result.error || null)
       return
     }
+
+    // clear error if success
+    setError(null)
 
     router.replace('/dashboard')
     router.refresh()
@@ -30,7 +52,7 @@ export default function SignupForm() {
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8 space-y-6">
 
         <h2 className="text-2xl font-bold text-center text-gray-800">
-          Create Account 🚀
+          Create Account
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
